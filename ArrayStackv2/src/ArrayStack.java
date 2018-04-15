@@ -36,7 +36,7 @@ public class ArrayStack {
 	
 	public double pop() throws Exception {
 		
-		if (!isEmpty()) {
+		if (!isEmpty()) {//checks if empty
 			double popStack[] = new double [capacity]; //temporary stack for moving indices
 			
 			for(int i=0; i<stack.length-1; i++) { //move indices up one
