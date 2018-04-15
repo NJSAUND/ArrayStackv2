@@ -8,8 +8,8 @@ public class ArrayStack {
 	public ArrayStack(int size) {
 		
 		capacity = size; //allows variable to be used across class
-		stack = new double[capacity]; //sets array size to int size
-		counter = 0;
+		stack = new double[capacity]; //sets array size to int capacity
+		counter = 0; //sets count of items in array as 0
 		
 	}
 	
