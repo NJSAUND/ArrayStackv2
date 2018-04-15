@@ -48,6 +48,7 @@ public class TestArrayStack {
 		System.out.println(myStack.peek(3));//peeks at fourth index
 		System.out.println("Count: "+ myStack.count()+"\n");//shows total used indices
 		
+		
 	}
 
 }
