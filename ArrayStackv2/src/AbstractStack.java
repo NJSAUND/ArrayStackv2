@@ -9,7 +9,7 @@ public abstract class AbstractStack {
 	public void clear() {
 		
 	}
-	
+	//test
 	
 	public abstract void push(double item) throws Exception;
 	
