@@ -1,5 +1,5 @@
 
-public class ArrayStack {
+public class ArrayStack extends AbstractStack implements clear() peak(){
 	
 	int capacity;//allows variable to be used across class
 	private double stack[]; //initiates array
