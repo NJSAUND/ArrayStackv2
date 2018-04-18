@@ -1,9 +1,17 @@
 
-public class ArrayStack extends AbstractStack implements clear() peak(){
+public class ArrayStack extends AbstractStack {
 	
 	int capacity;//allows variable to be used across class
-	private double stack[]; //initiates array
+	protected double stack[]; //initiates array
 	int counter; //tracks the top of the array
+		
+	
+	public ArrayStack(){
+		double forthstack[][][]; //didn't know if element meant size or element as in a three dimensional array.  As previously discussed the instructions are a bit vague as to what they are referring to.
+		//int size = 3;
+		//double forthstack[size];
+	
+	}
 	
 	public ArrayStack(int size) {
 		
@@ -72,5 +80,17 @@ public class ArrayStack extends AbstractStack implements clear() peak(){
 		return counter;
 	}
 	
+	@Override
+	public double peek() {
+		return stack[0];
+		
+	}
+
+	public void clear() throws Exception {
+		while (!isEmpty()) {
+			pop();
+		
+		}
+	}
 	
 }
