@@ -62,7 +62,7 @@ public class TestForth {
 			myStack.push(25);
 			myStack.push(5);
 			myStack.twoDup();
-			System.out.println(myStack.peek(0));//peeks at first index
+			System.out.println(myStack.peek());//peeks at first index
 			System.out.println(myStack.peek(1));//peeks at second index
 			System.out.println(myStack.peek(2));//peeks at third index
 			System.out.println(myStack.peek(3));//peeks at fourth index

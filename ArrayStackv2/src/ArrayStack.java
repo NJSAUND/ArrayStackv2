@@ -81,14 +81,14 @@ public class ArrayStack extends AbstractStack {
 	}
 	
 	@Override
-	public double peek() {
-		return stack[0];
+	public double peek() {//peek() method
+		return stack[0];//returns top of stack or stack[0]
 		
 	}
 
-	public void clear() throws Exception {
-		while (!isEmpty()) {
-			pop();
+	public void clear() throws Exception {//clear method
+		while (!isEmpty()) {//while this array is not empty
+			pop();//pop method
 		
 		}
 	}
