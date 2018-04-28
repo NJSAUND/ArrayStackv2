@@ -58,7 +58,7 @@ public class RPN extends ForthStack {
 		
 		JTextPane errorDisplay = new JTextPane();
 		errorDisplay.setEditable(false);
-		errorDisplay.setBounds(165, 90, 140, 25);
+		errorDisplay.setBounds(165, 90, 140, 44);
 		frame.getContentPane().add(errorDisplay);
 		
 		numericEntry = new JTextField();
@@ -246,21 +246,28 @@ public class RPN extends ForthStack {
 		JButton pushButton = new JButton("push");
 		pushButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(counter < capacity) {
-					double userInput = Integer.parseInt(numericEntry.getText());//get user input
+				String userInput1 = numericEntry.getText();
+
+				if (userInput1 == null) {
+					if(counter < capacity) {
+					double userInput2 = Integer.parseInt(numericEntry.getText());//get user input
 					try {
-						errorDisplay.setText("");
-						push(userInput);
+						errorDisplay.setText(" ");
+						push(userInput2);//push
 					} catch (Exception e1) {
 						errorDisplay.setText("Error");
-					}//push
+					}
 					numericDisplay.setText("" + stack[0] + "");
+					}
+						
+					else {
+						errorDisplay.setText("Stack overflow");
+					}
 				}
-					
 				else {
-					errorDisplay.setText("Stack overflow");
+					errorDisplay.setText("Must enter a user input to push");
 				}
+				
 				
 			}
 		});
@@ -268,15 +275,15 @@ public class RPN extends ForthStack {
 		frame.getContentPane().add(pushButton);
 		
 		JLabel lblUserInput = new JLabel("User Input:");
-		lblUserInput.setBounds(94, 31, 71, 14);
+		lblUserInput.setBounds(66, 25, 71, 14);
 		frame.getContentPane().add(lblUserInput);
 		
 		JLabel lblTopOfStack = new JLabel("Top of Stack:");
-		lblTopOfStack.setBounds(81, 66, 74, 14);
+		lblTopOfStack.setBounds(66, 68, 74, 14);
 		frame.getContentPane().add(lblTopOfStack);
 		
 		JLabel lblErrorMessage = new JLabel("Error Message:");
-		lblErrorMessage.setBounds(66, 101, 89, 14);
+		lblErrorMessage.setBounds(66, 108, 89, 14);
 		frame.getContentPane().add(lblErrorMessage);
 		
 		
