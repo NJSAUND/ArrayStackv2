@@ -3,8 +3,8 @@ public class TestForth {
 
 	public static void main(String[] args) throws Exception {
 
-			int size = 4; //sets array size
-			ForthStack myStack = new ForthStack(size); // initiate new array from ArrayStack
+			//int size = 4; //sets array size
+			ForthStack myStack = new ForthStack(); // initiate new array from ArrayStack
 			
 			System.out.println(myStack.isEmpty()+"\n");//tests isEmpty method
 			

@@ -2,8 +2,8 @@
 public class ForthStack extends ArrayStack implements Forth {//extends ArrayStack and implements Forth...self explanatory
 
 	
-	public ForthStack(int size) {
-		super(size);
+	public ForthStack() {
+		stack = new double [4];
 		//Auto-generated constructor stub
 	}
 
@@ -21,7 +21,7 @@ public class ForthStack extends ArrayStack implements Forth {//extends ArrayStac
 		}	
 			
 		else if(counter < 2) {//if counter is less than 2 throw exception
-			throw new Exception("Stack does not have enough to add.");
+			throw new Exception ("Stack does not have enough to add.");
 		
 		}
 	}
@@ -40,7 +40,8 @@ public class ForthStack extends ArrayStack implements Forth {//extends ArrayStac
 		}	
 			
 		else if(counter < 2) {//if counter is less than 2 throw exception
-			throw new Exception("Stack does not have enough to add.");
+			
+			throw new Exception("Stack does not have enough to sub.");
 		
 		}
 		
@@ -60,7 +61,7 @@ public class ForthStack extends ArrayStack implements Forth {//extends ArrayStac
 		}	
 			
 		else if(counter < 2) {//if counter is less than 2 throw exception
-			throw new Exception("Stack does not have enough to add.");
+			throw new Exception("Stack does not have enough to mult.");
 		
 		}
 		
@@ -80,7 +81,7 @@ public class ForthStack extends ArrayStack implements Forth {//extends ArrayStac
 		}	
 			
 		else if(counter < 2) {//if counter is less than 2 throw exception
-			throw new Exception("Stack does not have enough to add.");
+			throw new Exception("Stack does not have enough to div.");
 		}
 	}
 

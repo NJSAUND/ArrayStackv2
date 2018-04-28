@@ -10,12 +10,18 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 
-public class RPN {
-
+public class RPN extends ForthStack {
+	
+	
+	
 	private JFrame frame;
 	private JTextField numericEntry;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -42,61 +48,239 @@ public class RPN {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 400, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton plusButton = new JButton("+");
-		plusButton.setBounds(88, 136, 61, 40);
-		frame.getContentPane().add(plusButton);
+		JTextPane errorDisplay = new JTextPane();
+		errorDisplay.setEditable(false);
+		errorDisplay.setBounds(165, 90, 140, 25);
+		frame.getContentPane().add(errorDisplay);
 		
 		numericEntry = new JTextField();
-		numericEntry.setBounds(78, 22, 229, 25);
+		numericEntry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String userInput = numericEntry.getText();
+				//double userInput = Integer.parseInt(numericEntry.getText());
+			}
+		});
+		numericEntry.setBounds(165, 20, 140, 25);
 		frame.getContentPane().add(numericEntry);
 		numericEntry.setColumns(10);
 		
+		
 		JTextPane numericDisplay = new JTextPane();
+		//numericDisplay.setText("" + top + "");
 		numericDisplay.setEditable(false);
-		numericDisplay.setBounds(78, 58, 229, 25);
+		numericDisplay.setBounds(165, 55, 140, 25);
 		frame.getContentPane().add(numericDisplay);
 		
-		JTextPane errorDisplay = new JTextPane();
-		errorDisplay.setEditable(false);
-		errorDisplay.setBounds(78, 94, 229, 25);
-		frame.getContentPane().add(errorDisplay);
+		
+		
+		JButton plusButton = new JButton("+");
+		plusButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(counter >= 2){  
+					try {
+						errorDisplay.setText("");
+						add();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}//add
+					numericDisplay.setText("" + stack[0] + "");	
+				}
+				else {//if counter is less than 2 throw exception
+					errorDisplay.setText("Stack does not have enough to add.");
+				}
+			}
+		});
+		plusButton.setBounds(66, 145, 71, 40);
+		frame.getContentPane().add(plusButton);
+		
+
 		
 		JButton minusButton = new JButton("-");
-		minusButton.setBounds(159, 136, 61, 40);
+		minusButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(counter >= 2) {//if counter is greater than or equal to 2 run
+					try {
+						errorDisplay.setText("");
+						sub();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}	
+					numericDisplay.setText("" + stack[0] + "");
+				}	
+				else if(counter < 2) {//if counter is less than 2 throw exception
+					errorDisplay.setText("Stack does not have enough to sub.");
+				}	
+			}
+		});
+		minusButton.setBounds(147, 145, 76, 40);
 		frame.getContentPane().add(minusButton);
 		
 		JButton multiplyButton = new JButton("*");
-		multiplyButton.setBounds(88, 187, 61, 40);
+		multiplyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(counter >= 2) {//if counter is greater than or equal to 2 run
+					try {
+						errorDisplay.setText("");
+						mult();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");;
+					}
+					numericDisplay.setText("" + stack[0] + "");
+
+				}		
+				else if(counter < 2) {//if counter is less than 2 throw exception
+					errorDisplay.setText("Stack does not have enough to mult.");
+				}
+			}
+		});
+		multiplyButton.setBounds(66, 196, 71, 40);
 		frame.getContentPane().add(multiplyButton);
 		
 		JButton divideButton = new JButton("/");
-		divideButton.setBounds(159, 187, 61, 40);
+		divideButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(counter >= 2) {//if counter is greater than or equal to 2 run
+					try {
+						errorDisplay.setText("");
+						div();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}
+				}		
+				else if(counter < 2) {//if counter is less than 2 throw exception
+					errorDisplay.setText("Stack does not have enough to mult.");
+				}
+			}
+		});
+		divideButton.setBounds(147, 196, 76, 40);
 		frame.getContentPane().add(divideButton);
 		
 		JButton dupButton = new JButton("dup");
-		dupButton.setBounds(88, 238, 61, 40);
+		dupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!isEmpty() && counter < capacity) {//if array isn't empty and counter is less than capacity then run
+					try {
+						dup();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}
+				}	
+				else if(counter == capacity) {//if capacity left is less than 2 throw exception
+				errorDisplay.setText("Stack is full cannot duplicate");
+				}
+				else if (isEmpty()) {//if array is empty throw exception
+				errorDisplay.setText("Stack is empty cannot duplicate");
+				}
+			}
+		});
+		dupButton.setBounds(66, 247, 71, 40);
 		frame.getContentPane().add(dupButton);
 		
 		JButton twodupButton = new JButton("2dup");
-		twodupButton.setBounds(159, 238, 61, 40);
+		twodupButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if((capacity - counter) >= 2) {//if capacity left is greater than or equal to two then run
+					try {
+						twoDup();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}
+				}		
+				else if((counter - capacity) < 2 ) {//if capacity left is less than 2 throw exception
+					errorDisplay.setText("Stack is does not have two available indices and cannot duplicate twice");
+				}
+				else if (isEmpty()) {//if array is empty throw exception
+					errorDisplay.setText("Stack is empty cannot duplicate twice");
+				}
+			}
+		});
+		twodupButton.setBounds(147, 247, 76, 40);
 		frame.getContentPane().add(twodupButton);
 		
 		JButton clrButton = new JButton("clr");
-		clrButton.setBounds(230, 136, 61, 40);
+		clrButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					errorDisplay.setText("");
+					clear();
+					numericDisplay.setText("" + stack[0] + "");
+				} catch (Exception e1) {
+					errorDisplay.setText("Error");
+				}
+			}
+		});
+		clrButton.setBounds(233, 145, 77, 40);
 		frame.getContentPane().add(clrButton);
 		
 		JButton popButton = new JButton("pop");
-		popButton.setBounds(230, 187, 61, 40);
+		popButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!isEmpty()) {//checks if empty
+					try {
+						errorDisplay.setText("");
+						pop();
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}
+					numericDisplay.setText("" + stack[0] + "");
+				}
+				
+				else {
+					errorDisplay.setText("Stack is empty: cannot pop!");//error message for empty stack
+				}
+				
+			}
+		});
+		popButton.setBounds(233, 196, 77, 40);
 		frame.getContentPane().add(popButton);
 		
 		JButton pushButton = new JButton("push");
-		pushButton.setBounds(230, 238, 61, 40);
+		pushButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(counter < capacity) {
+					double userInput = Integer.parseInt(numericEntry.getText());//get user input
+					try {
+						errorDisplay.setText("");
+						push(userInput);
+					} catch (Exception e1) {
+						errorDisplay.setText("Error");
+					}//push
+					numericDisplay.setText("" + stack[0] + "");
+				}
+					
+				else {
+					errorDisplay.setText("Stack overflow");
+				}
+				
+			}
+		});
+		pushButton.setBounds(233, 247, 77, 40);
 		frame.getContentPane().add(pushButton);
+		
+		JLabel lblUserInput = new JLabel("User Input:");
+		lblUserInput.setBounds(94, 31, 71, 14);
+		frame.getContentPane().add(lblUserInput);
+		
+		JLabel lblTopOfStack = new JLabel("Top of Stack:");
+		lblTopOfStack.setBounds(81, 66, 74, 14);
+		frame.getContentPane().add(lblTopOfStack);
+		
+		JLabel lblErrorMessage = new JLabel("Error Message:");
+		lblErrorMessage.setBounds(66, 101, 89, 14);
+		frame.getContentPane().add(lblErrorMessage);
+		
+		
+		
+		
 	}
 }

@@ -7,15 +7,17 @@ public class ArrayStack extends AbstractStack {
 		
 	
 	public ArrayStack(){
-		double forthstack[][][]; //didn't know if element meant size or element as in a three dimensional array.  As previously discussed the instructions are a bit vague as to what they are referring to.
-		//int size = 3;
+
+		
+		stack = new double [4];
+		capacity = stack.length;
 		//double forthstack[size];
 	
 	}
 	
 	public ArrayStack(int size) {
 		
-		capacity = size; //allows variable to be used across class
+		capacity = stack.length; //allows variable to be used across class
 		stack = new double[capacity]; //sets array size to int capacity
 		counter = 0; //sets count of items in array as 0
 		
