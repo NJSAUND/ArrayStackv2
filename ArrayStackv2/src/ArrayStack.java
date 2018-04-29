@@ -20,7 +20,7 @@ public class ArrayStack extends AbstractStack {
 		capacity = stack.length; //allows variable to be used across class
 		stack = new double[capacity]; //sets array size to int capacity
 		counter = 0; //sets count of items in array as 0
-		
+		//test
 	}
 	
 	public void push(double item) throws Exception {
