@@ -9,7 +9,7 @@ public class ArrayStack extends AbstractStack {
 	public ArrayStack(){
 
 		
-		stack = new double [4];
+		stack = new double [10];
 		capacity = stack.length;
 		//double forthstack[size];
 	
